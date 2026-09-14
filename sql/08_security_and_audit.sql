@@ -1,8 +1,7 @@
 CREATE OR ALTER FUNCTION platform.fn_tenant_security(@tenant_id int)
 RETURNS TABLE WITH SCHEMABINDING
 AS RETURN SELECT 1 access_granted
-WHERE @tenant_id=TRY_CONVERT(int,SESSION_CONTEXT(N'tenant_id'))
-   OR IS_MEMBER('db_owner')=1;
+WHERE @tenant_id=TRY_CONVERT(int,SESSION_CONTEXT(N'tenant_id'));
 GO
 
 CREATE SECURITY POLICY platform.tenant_security_policy
